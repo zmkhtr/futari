@@ -14,7 +14,7 @@ interface ApiInterface {
     suspend fun getAllQuiz() : Response<QuizResponse>
 
     @FormUrlEncoded
-    @Headers("x-api-key: fxaAFKMDsnasgf9N0gHQD29Z4NMxljzq")
+    @Headers("x-api-key: jGuKSph0czODvEbNxGqPMoOWrycdiVDW")
     @PUT("https://api.thebigbox.id/sms-otp/1.0.0/otp/fxaAFKMDsnasgf9N0gHQD29Z4NMxljzq")
     suspend fun getOtp(
         @Field("maxAttempt") attempt: String?,  //3
@@ -26,7 +26,7 @@ interface ApiInterface {
 
 
     @FormUrlEncoded
-    @Headers("x-api-key: kmn6kNpP2uiPvCF5IdcuPR4XSOXkeOqw")
+    @Headers("x-api-key: jGuKSph0czODvEbNxGqPMoOWrycdiVDW")
     @POST("https://api.thebigbox.id/sms-otp/1.0.0/otp/fxaAFKMDsnasgf9N0gHQD29Z4NMxljzq/verifications")
     suspend fun verificationOtp(
         @Field("maxAttempt") attempt: String?,  //3
@@ -35,8 +35,8 @@ interface ApiInterface {
         @Field("digit") digit: String?
     ): Response<OtpVerificationResponse> //4
 
-    @Multipart
-    @Headers("x-api-key: fxaAFKMDsnasgf9N0gHQD29Z4NMxljzq")
+    @FormUrlEncoded
+    @Headers("x-api-key: jGuKSph0czODvEbNxGqPMoOWrycdiVDW")
     @PUT("https://api.thebigbox.id/sms-premium/1.0.0/messages")
     suspend fun sendSMSCustom(
         @Field("msisdn") phoneNumber : String?,  //3

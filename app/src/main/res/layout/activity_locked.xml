@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
-    tools:context=".LockedActivity">
+    tools:context=".ui.activity.LockedActivity">
 
     <ImageView
         android:id="@+id/imageView9"
@@ -15,14 +15,14 @@
         android:layout_marginTop="188dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView16"
+        app:layout_constraintBottom_toTopOf="@+id/tvLockedCountDown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/locked" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/tvLockedCountDown"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -55,7 +55,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textView18"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+        app:layout_constraintTop_toBottomOf="@+id/tvLockedCountDown" />
 
     <TextView
         android:id="@+id/textView18"

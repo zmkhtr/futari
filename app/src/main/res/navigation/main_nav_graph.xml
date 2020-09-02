@@ -6,9 +6,9 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.jawabdulu.app.ui.fragment.HomeFragment"
+        android:name="com.jawabdulu.app.ui.fragment.AllAppsFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_all_apps" />
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.jawabdulu.app.ui.fragment.SettingFragment"
@@ -19,4 +19,9 @@
         android:name="com.jawabdulu.app.ui.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+<!--    <fragment-->
+<!--        android:id="@+id/allAppsFragment"-->
+<!--        android:name="com.jawabdulu.app.ui.fragment.AllAppsFragment"-->
+<!--        android:label="fragment_all_apps"-->
+<!--        tools:layout="@layout/fragment_all_apps" />-->
 </navigation>

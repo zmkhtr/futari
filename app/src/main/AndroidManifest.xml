@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.jawabdulu.app">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:name=".MyApplication"
@@ -13,16 +19,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".WinActivity"></activity>
-        <activity android:name=".LockedActivity" />
-        <activity android:name=".SplashJawabDuluActivity" />
-        <activity android:name=".VerifikasiOTPActivity" />
-        <activity android:name=".DataOrangTuaActivity" />
+        <activity android:name=".ui.activity.WinActivity"></activity>
+        <activity android:name=".ui.activity.LockedActivity" />
+        <activity android:name=".ui.activity.SplashJawabDuluActivity" />
+        <activity android:name=".ui.activity.VerifikasiOTPActivity" />
+        <activity android:name=".ui.activity.DataOrangTuaActivity" />
         <activity android:name=".ui.activity.MainActivity" />
-        <activity android:name=".IntroSliderActivity" />
+        <activity android:name=".ui.activity.IntroSliderActivity"
+            android:label="My Custom AppIntro" />
         <activity android:name=".ui.activity.QuizActivity" />
         <activity android:name=".ui.activity.PasscodeActivity" />
-        <activity android:name=".DataAnakActivity" />
+        <activity android:name=".ui.activity.DataAnakActivity" />
         <activity android:name=".ui.activity.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,6 +37,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".servicejava.BackgroundService" />
+
     </application>
 
 </manifest>

@@ -18,10 +18,10 @@ class BigBoxRepository(
 //    suspend fun deleteArticle(article: NewsResponse.Article) = db.getArticleDao().deleteArticle(article)
 
     suspend fun getOtp(phoneNumber : String) =
-        RetrofitInstance.api.getOtp("3", phoneNumber,"60", "{{otp}}","4")
+        RetrofitInstance.api.getOtp("3", phoneNumber,"60", "Kode OTP Untuk aplikasi Jawab Dulu adalah : {{otp}}","6")
 
     suspend fun getOtpVerification(otp : String) =
-        RetrofitInstance.api.verificationOtp("3","60", otp,"4")
+        RetrofitInstance.api.verificationOtp("3","60", otp,"6")
 
     suspend fun sendSMSCustom(phoneNumber: String, content : String) =
         RetrofitInstance.api.sendSMSCustom(phoneNumber, content)

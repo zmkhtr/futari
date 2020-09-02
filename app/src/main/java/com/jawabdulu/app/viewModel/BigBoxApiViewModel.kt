@@ -113,7 +113,7 @@ class BigBoxApiViewModel(
         } catch (t: Throwable) {
             when (t){
                 is IOException -> sms.postValue(Resource.Error("Network Failure"))
-                else -> sms.postValue(Resource.Error("Conversion Error"))
+                else -> sms.postValue(Resource.Error("Conversion Error $t"))
             }
         }
     }

@@ -41,7 +41,7 @@ class QuizViewModel(
         quizRepository.deleteQuiz(quiz)
     }
 
-    fun getQuizRandom(quizID : Int) = quizRepository.getQuiz(quizID)
+    fun getQuizRandom(quizID : Int, kelas : String) = quizRepository.getQuiz(quizID, kelas)
 
     private fun handleQuizResponse(response: Response<QuizResponse>): Resource<QuizResponse> {
         if (response.isSuccessful) {

@@ -74,6 +74,7 @@ class PasscodeActivity : BaseActivity() {
                 }
             } else if (Preferences.getUserPassCode() == passCode) {
                 startActivity(Intent(this, MainActivity::class.java))
+                finish()
             } else {
                 createToast("Passcode salah")
                 reloadActivity()

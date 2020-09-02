@@ -42,6 +42,7 @@ dependencies {
 
     // Architectural Components
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "android.arch.lifecycle:extensions:1.1.1"
 
     // Room
     implementation "androidx.room:room-runtime:2.2.5"
@@ -80,4 +81,13 @@ dependencies {
 
     //OTP View
     implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.1.1'
+
+    //App intro
+    implementation 'com.github.AppIntro:AppIntro:6.0.0'
+
+    //Material Design
+    implementation 'com.google.android.material:material:1.1.0'
+
+    //alarm
+    implementation 'com.github.zubairehman:AlarmManager:v1.2.0-alpha01'
 }

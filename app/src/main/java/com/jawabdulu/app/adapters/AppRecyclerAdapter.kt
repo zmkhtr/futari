@@ -1,30 +1,33 @@
 package com.jawabdulu.app.adaptersimport
 
-import androidx.recyclerview.widget.RecyclerView
-import com.jawabdulu.app.R
-import com.jawabdulu.app.models.AppModel
-
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
+import com.jawabdulu.app.R
+import com.jawabdulu.app.models.App
 import kotlinx.android.synthetic.main.item_app_list.view.*
 
 class AppRecyclerAdapter(private val interaction: Interaction? = null) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<AppModel>() {
-        override fun areItemsTheSame(oldItem: AppModel, newItem: AppModel): Boolean {
+
+    lateinit var context: Context
+    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<App>() {
+        override fun areItemsTheSame(oldItem: App, newItem: App): Boolean {
             return oldItem.packageName == newItem.packageName
         }
 
-        override fun areContentsTheSame(oldItem: AppModel, newItem: AppModel): Boolean {
+        override fun areContentsTheSame(oldItem: App, newItem: App): Boolean {
             return oldItem == newItem
         }
     }
     private val differ = AsyncListDiffer(this, DIFF_CALLBACK)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return AppViewHolder(
+        val vh = AppViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.item_app_list,
                 parent,
@@ -32,6 +35,9 @@ class AppRecyclerAdapter(private val interaction: Interaction? = null) :
             ),
             interaction
         )
+
+        context = parent.context
+        return vh
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -46,7 +52,7 @@ class AppRecyclerAdapter(private val interaction: Interaction? = null) :
         return differ.currentList.size
     }
 
-    fun submitList(list: List<AppModel>) {
+    fun submitList(list: List<App>) {
         differ.submitList(list)
     }
 
@@ -55,17 +61,23 @@ class AppRecyclerAdapter(private val interaction: Interaction? = null) :
         itemView: View,
         private val interaction: Interaction?
     ) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: AppModel) = with(itemView) {
+        fun bind(item: App) = with(itemView) {
             itemView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
             }
 
             ivAppItemIcon.setImageDrawable(item.iconAplikasi)
             tvAppItemName.text = item.namaAplikasi
+
+            if (item.locked) {
+                ivAppItemLockIcon.setImageResource(R.drawable.ic_lock)
+            } else {
+                ivAppItemLockIcon.setImageResource(R.drawable.ic_unlock)
+            }
         }
     }
 
     interface Interaction {
-        fun onItemSelected(position: Int, item: AppModel)
+        fun onItemSelected(position: Int, item: App)
     }
 }

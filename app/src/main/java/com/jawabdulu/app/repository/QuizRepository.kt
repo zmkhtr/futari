@@ -16,5 +16,5 @@ class QuizRepository(
 
     suspend fun deleteQuiz(quiz: QuizResponse.QuizResponseItem) = db.getQuizDao().deleteQuiz(quiz)
 
-    fun getQuiz(quizID: Int) = db.getQuizDao().getQuiz(quizID)
+    fun getQuiz(quizID: Int, kelas : String) = db.getQuizDao().getQuiz(quizID, kelas)
 }

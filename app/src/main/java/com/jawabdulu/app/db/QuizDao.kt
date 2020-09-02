@@ -18,8 +18,8 @@ interface QuizDao {
     fun getAllQuiz() : LiveData<List<QuizResponse.QuizResponseItem>>
 
 
-    @Query("SELECT * FROM quizzes WHERE id = :quizID")
-    fun getQuiz(quizID : Int) : LiveData<List<QuizResponse.QuizResponseItem>>
+    @Query("SELECT * FROM quizzes WHERE id = :quizID AND gradeLevel = :kelas")
+    fun getQuiz(quizID : Int, kelas : String) : LiveData<List<QuizResponse.QuizResponseItem>>
 
 
 
@@ -31,9 +31,9 @@ interface QuizDao {
     suspend fun deleteApp(appModel: AppModel)
 
     @Query("SELECT * FROM apps")
-    fun getAllApp() : LiveData<List<QuizResponse.QuizResponseItem>>
+    fun getAllApp() : LiveData<List<AppModel>>
 
-    @Query("SELECT * FROM apps WHERE iconAplikasi = :locked")
-    fun getAllLockedApp(locked : Drawable) : LiveData<List<QuizResponse.QuizResponseItem>>
+//    @Query("SELECT * FROM apps WHERE iconAplikasi = :locked")
+//    fun getAllLockedApp(locked : Boolean) : LiveData<List<AppModel>>
 
 }

@@ -12,7 +12,7 @@
 
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tvProfileNamaAnak"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -22,13 +22,13 @@
             android:text="Azzam Mukactar"
             android:textColor="#000000"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView21"
-            app:layout_constraintEnd_toStartOf="@+id/textView3"
+            app:layout_constraintBottom_toTopOf="@+id/tvProfileTglLahir"
+            app:layout_constraintEnd_toStartOf="@+id/tvProfileKelas"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tvProfileKelas"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -39,14 +39,14 @@
             android:text="Kelas 6 SD"
             android:textColor="@color/colorAccent"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView21"
+            app:layout_constraintBottom_toTopOf="@+id/tvProfileTglLahir"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintStart_toEndOf="@+id/tvProfileNamaAnak"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/textView21"
+            android:id="@+id/tvProfileTglLahir"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -54,13 +54,13 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="4dp"
             android:text="14 - 03 - 1998"
-            app:layout_constraintBottom_toTopOf="@+id/textView22"
+            app:layout_constraintBottom_toTopOf="@+id/tvProfileBenar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/tvProfileNamaAnak" />
 
         <TextView
-            android:id="@+id/textView22"
+            android:id="@+id/tvProfileBenar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -69,13 +69,13 @@
             android:layout_marginBottom="4dp"
             android:text="Total Jawaban Benar : 100"
             android:textColor="#4CAF50"
-            app:layout_constraintBottom_toTopOf="@+id/textView23"
+            app:layout_constraintBottom_toTopOf="@+id/tvProfileSalah"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView21" />
+            app:layout_constraintTop_toBottomOf="@+id/tvProfileTglLahir" />
 
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/tvProfileSalah"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -85,7 +85,7 @@
             android:textColor="#E91E63"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+            app:layout_constraintTop_toBottomOf="@+id/tvProfileBenar" />
 
         <TextView
             android:id="@+id/textView25"
@@ -97,18 +97,16 @@
             android:layout_marginBottom="8dp"
             android:text="Aplikasi yang sering dibuka :"
             android:textColor="#000000"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintBottom_toTopOf="@+id/rvProfile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+            app:layout_constraintTop_toBottomOf="@+id/tvProfileSalah" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/rvProfile"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

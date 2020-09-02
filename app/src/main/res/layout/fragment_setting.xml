@@ -26,8 +26,9 @@
             android:text="Laporan harian" />
 
         <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switch1"
+            android:id="@+id/switchSettingLaporan"
             android:layout_width="0dp"
+            android:checked="true"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
 
@@ -80,7 +81,7 @@
                 android:text="Nomor HP orang tua" />
 
             <TextView
-                android:id="@+id/textView21141"
+                android:id="@+id/tvSettingNoHP"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

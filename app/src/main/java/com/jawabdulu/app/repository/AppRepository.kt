@@ -2,19 +2,21 @@ package com.jawabdulu.app.repository
 
 import com.jawabdulu.app.api.RetrofitInstance
 import com.jawabdulu.app.db.QuizDatabase
+import com.jawabdulu.app.models.AppModel
 import com.jawabdulu.app.models.QuizResponse
 
 class AppRepository(
     val db : QuizDatabase
 ) {
 
-    suspend fun getAllApp() = RetrofitInstance.api.getAllQuiz()
 
-    suspend fun upsert(quiz : QuizResponse.QuizResponseItem) = db.getQuizDao().upsert(quiz)
+    suspend fun upsert(app : AppModel) = db.getQuizDao().upsertApp(app)
 
-    fun getListQuiz() = db.getQuizDao().getAllQuiz()
+    fun getAllApp() = db.getQuizDao().getAllApp()
 
-    suspend fun deleteQuiz(quiz: QuizResponse.QuizResponseItem) = db.getQuizDao().deleteQuiz(quiz)
+//    fun getAllLockedApp(locked: Boolean) = db.getQuizDao().getAllLockedApp(locked)
 
-    fun getQuiz(quizID: Int) = db.getQuizDao().getQuiz(quizID)
+    suspend fun deleteApp(appModel: AppModel) = db.getQuizDao().deleteApp(appModel)
+
+//    fun getApp(quizID: Int, kelas : String) = db.getQuizDao().getQuiz(quizID, kelas)
 }

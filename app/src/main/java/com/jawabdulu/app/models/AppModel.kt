@@ -8,10 +8,7 @@ import androidx.room.PrimaryKey
     tableName = "apps"
 )
 data class AppModel(
-    @PrimaryKey(autoGenerate = true)
-    var id : Int?,
-    var namaAplikasi: String,
-    var iconAplikasi: Drawable,
-    var locked: Boolean,
-    var packageName: String
+    @PrimaryKey
+    var packageName: String,
+    var pass : String
 )
