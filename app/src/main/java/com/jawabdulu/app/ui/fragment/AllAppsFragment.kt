@@ -18,6 +18,9 @@ import com.jawabdulu.app.models.App
 import com.jawabdulu.app.models.AppModel
 import com.jawabdulu.app.preferences.Preferences
 import kotlinx.android.synthetic.main.fragment_all_apps.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.math.log
 
@@ -55,42 +58,49 @@ class AllAppsFragment : BaseFragment(R.layout.fragment_all_apps), AppRecyclerAda
 
 
         setupRecyclerView()
-        getInstalledApps()
+        CoroutineScope(Dispatchers.IO).launch {
+            getInstalledApps()
+        }
     }
-
-
 
     private fun getInstalledApps() {
         val packs: List<PackageInfo> = requireActivity().packageManager.getInstalledPackages(0)
         for (i in packs.indices) {
             val p = packs[i]
             Log.d(TAG, "getInstalledApps: " + packs.size)
+
+            val appName = p.applicationInfo.loadLabel(requireActivity().packageManager).toString()
+            val icon = p.applicationInfo.loadIcon(requireActivity().packageManager)
             if (lock.isNotEmpty()){
 
             if (lock.contains(packs[i].packageName)) {
-                if (!isSystemPackage(p)) {
-                    val appName = p.applicationInfo.loadLabel(requireActivity().packageManager).toString()
-                    val icon = p.applicationInfo.loadIcon(requireActivity().packageManager)
-
-//                    val iconValue = R.drawable.icon
-                    appList.add(App(appName, icon, true, packs[i].packageName))
+                if (isSystemPackage(p)) {
+                    appList.add(App(appName, icon, true, packs[i].packageName, true))
+                } else {
+                    appList.add(App(appName, icon, true, packs[i].packageName, false))
                 }
             } else {
-                if (!isSystemPackage(p)) {
-                    val appName = p.applicationInfo.loadLabel(requireActivity().packageManager).toString()
-                    val icon = p.applicationInfo.loadIcon(requireActivity().packageManager)
-                    appList.add(App(appName, icon, false, packs[i].packageName))
+                if (isSystemPackage(p)) {
+                    appList.add(App(appName, icon, false, packs[i].packageName, true))
+                } else {
+                    appList.add(App(appName, icon, false, packs[i].packageName, false))
                 }
             }
             } else {
-                if (!isSystemPackage(p)) {
-                    val appName = p.applicationInfo.loadLabel(requireActivity().packageManager).toString()
-                    val icon = p.applicationInfo.loadIcon(requireActivity().packageManager)
-                    appList.add(App(appName, icon, false, packs[i].packageName))
+                if (isSystemPackage(p)) {
+                    appList.add(App(appName, icon, false, packs[i].packageName, true))
+                } else {
+                    appList.add(App(appName, icon, false, packs[i].packageName, false))
                 }
             }
         }
-        appAdapter.submitList(appList)
+        CoroutineScope(Dispatchers.Main).launch {
+            var sortedList = appList.sortedBy { it.packageName }
+            sortedList = sortedList.sortedBy { it.isSystemPackage }
+            sortedList = sortedList.sortedByDescending { it.locked }
+            appAdapter.submitList(sortedList)
+            progressBar.visibility = View.INVISIBLE
+        }
     }
 
     private fun isSystemPackage(p: PackageInfo): Boolean {

@@ -41,6 +41,9 @@ public class BackgroundService extends Service {
     static int flag2 = 0;
 
     String current_app = "";
+
+    AppChecker appChecker;
+
     public BackgroundService(){}
 
     @Override
@@ -80,19 +83,59 @@ public class BackgroundService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
-        startTimer();
+//        startTimer();
+        startChecker();
+//                Preferences.INSTANCE.setCurrentApp("com.jawabdulu.app");
         return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        stoptimertask();
+//        stoptimertask();
+        stopChecker();
 
         Intent broadcastIntent = new Intent();
         broadcastIntent.setAction("restartservice");
         broadcastIntent.setClass(this, RestartService.class);
         this.sendBroadcast(broadcastIntent);
+    }
+
+    private void stopChecker(){
+        appChecker.stop();
+    }
+
+    private void startChecker(){
+        appChecker = new AppChecker();
+        appChecker.when(getPackageName(), new AppChecker.Listener() {
+            @Override
+            public void onForeground(String process) {
+//                Log.d(TAG, "onForeground: current app " + process);
+
+//                if (!Preferences.INSTANCE.getCurrentApp().equals(process)) {
+//                    Preferences.INSTANCE.setCurrentApp(process);
+//                }
+            }
+        }).whenOther(new AppChecker.Listener() {
+                    @Override
+                    public void onForeground(String process) {
+                        ArrayList<String> name = (ArrayList<String>) Preferences.INSTANCE.getListPackageName();
+
+//                        Preferences.INSTANCE.setCurrentApp(process);
+                        if (name.contains(process)) {
+                                if (!Preferences.INSTANCE.getCurrentApp().equals(process)) {
+                                    Preferences.INSTANCE.setCurrentApp(process);
+                                    Intent lockIntent = new Intent(mContext, SplashJawabDuluActivity.class);
+                                    lockIntent.putExtra("package", process);
+                                    lockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    mContext.startActivity(lockIntent);
+                                }
+
+                        }
+                        Preferences.INSTANCE.setCurrentApp(process);
+                    }
+                }).timeout(500)
+                .start(this);
     }
 
     private Timer timer;
@@ -102,7 +145,9 @@ public class BackgroundService extends Service {
         timerTask = new TimerTask() {
             @Override
             public void run() {
+                Log.d(TAG, "run: " + printForegroundTask());
                 if (flag == 0) {
+
 
                     ArrayList<String> name = (ArrayList<String>) Preferences.INSTANCE.getListPackageName();
 
@@ -129,10 +174,10 @@ public class BackgroundService extends Service {
                 }
             }
         };
-        timer.schedule(timerTask,0,100);
+        timer.schedule(timerTask,0,10);
     }
 
-    public void stoptimertask(){
+    private void stoptimertask(){
         if(timer != null) {
             timer.cancel();
             timer = null;

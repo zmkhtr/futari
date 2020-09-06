@@ -72,13 +72,16 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), AppWithoutLockR
             if (lock.isNotEmpty()){
 
                 if (lock.contains(packs[i].packageName)) {
-                    if (!isSystemPackage(p)) {
-                        val appName =
-                            p.applicationInfo.loadLabel(requireActivity().packageManager).toString()
-                        val icon = p.applicationInfo.loadIcon(requireActivity().packageManager)
+
+                    val appName =
+                        p.applicationInfo.loadLabel(requireActivity().packageManager).toString()
+                    val icon = p.applicationInfo.loadIcon(requireActivity().packageManager)
+                    if (isSystemPackage(p)) {
 
 //                    val iconValue = R.drawable.icon
-                        appList.add(App(appName, icon, true, packs[i].packageName))
+                        appList.add(App(appName, icon, true, packs[i].packageName, true))
+                    } else {
+                        appList.add(App(appName, icon, true, packs[i].packageName, false))
                     }
                 }
             }

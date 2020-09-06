@@ -54,7 +54,7 @@ class SettingFragment : BaseFragment(R.layout.fragment_setting), IAlarmListener 
 
     override fun perform(context: Context, intent: Intent) {
         val anak = Preferences.getDataAnak()
-        val content = "Laporan Harian Jawab Dulu!, hari ini ${anak!!.nama} bisa menjawab ${anak.totalBenar} pertanyaan dengan benar loh ! dan aplikasi favorit ${anak.nama} adalah : Mobile Legend"
+        val content = "Laporan Harian Jawab Dulu!, hari ini ${anak!!.nama} bisa menjawab ${anak.totalBenar} pertanyaan dengan benar loh ! dan aplikasi favorit ${anak.nama} adalah : Pou"
 
         Log.d(TAG, "perform: gg $content")
         viewModelBigBox.sendSMS(Preferences.getDataOrangTua()!!.nomorHandphone, content)

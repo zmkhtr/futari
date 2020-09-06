@@ -1,9 +1,11 @@
 package com.jawabdulu.app.ui.activity
 
+import android.annotation.TargetApi
 import android.app.ActivityManager
 import android.app.AppOpsManager
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -26,12 +28,13 @@ import com.jawabdulu.app.util.Resource
 import com.jawabdulu.app.viewModel.*
 import kotlinx.android.synthetic.main.activity_main.*
 
+
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
     lateinit var viewModel : QuizViewModel
     lateinit var viewModelApp : AppViewModel
     lateinit var viewModelBigBox : BigBoxApiViewModel
-    private var mServiceIntent: Intent? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +51,9 @@ class MainActivity : AppCompatActivity() {
 
         val bigBoxRepository = BigBoxRepository()
         val viewModelProviderFactoryBigBox = BigBoxViewModelFactory(application, bigBoxRepository)
-        viewModelBigBox = ViewModelProvider(this, viewModelProviderFactoryBigBox).get(BigBoxApiViewModel::class.java)
+        viewModelBigBox = ViewModelProvider(this, viewModelProviderFactoryBigBox).get(
+            BigBoxApiViewModel::class.java
+        )
 
 
         viewModel.quiz.observe(this, Observer { response ->
@@ -77,80 +82,11 @@ class MainActivity : AppCompatActivity() {
         toolbar.title = resources.getString(R.string.app_name)
         toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorAccent))
 
-//        bottomNavigationView.setOnNavigationItemReselectedListener {
-//
-//        }
-//
-//        mainNavHostFragment.findNavController().addOnDestinationChangedListener { _, destination, _ ->
-//
-//            for(menuItem in bottomNavigationView.menu.iterator()){
-//                menuItem.isEnabled = true
-//            }
-//
-//            val menu = bottomNavigationView.menu.findItem(destination.id)
-//            menu?.isEnabled = false
-//        }
-
 
         bottomNavigationView.setupWithNavController(mainNavHostFragment.findNavController())
 
-
-
-
-
-
-        validatePermission()
     }
 
-    private fun validatePermission() {
-
-        if (!isAccessGranted()) {
-            AlertDialog.Builder(this)
-                .setTitle("USAGE STATE Permission")
-                .setMessage("Mohon perbolehkan permission USAGE STATE untuk aplikasi ini pada Setting")
-                .setPositiveButton(
-                    "Allow"
-                ) { dialog, which -> startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)) }
-                .setNegativeButton(
-                    "Abort"
-                ) { dialog, which -> }
-                .show()
-        }
-        mServiceIntent = Intent(this, BackgroundService::class.java)
-        if (!isMyServiceRunning(BackgroundService::class.java)) {
-            startService(mServiceIntent)
-        }
-    }
-
-    private fun isMyServiceRunning(serviceClass: Class<*>): Boolean {
-        val manager = getSystemService(ACTIVITY_SERVICE) as ActivityManager
-        for (serviceInfo in manager.getRunningServices(Int.MAX_VALUE)) {
-            if (serviceClass.name == serviceInfo.service.className) {
-                Log.d(TAG, "Running")
-                return true
-            }
-        }
-        Log.d(TAG, "isMyServiceRunning: not running")
-        return false
-    }
-
-    private fun isAccessGranted(): Boolean {
-        return try {
-            val packageManager = packageManager
-            val applicationInfo = packageManager.getApplicationInfo(packageName, 0)
-            val appOpsManager = getSystemService(APP_OPS_SERVICE) as AppOpsManager
-            var mode = 0
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
-                mode = appOpsManager.checkOpNoThrow(
-                    AppOpsManager.OPSTR_GET_USAGE_STATS,
-                    applicationInfo.uid, applicationInfo.packageName
-                )
-            }
-            mode == AppOpsManager.MODE_ALLOWED
-        } catch (e: PackageManager.NameNotFoundException) {
-            false
-        }
-    }
 
     override fun onPause() {
         super.onPause()

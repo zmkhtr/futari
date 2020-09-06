@@ -20,6 +20,7 @@ object Preferences {
 
 
     private const val LAPORAN_KEY ="LAPORAN_KEY"
+    private const val CURRENT_APP_KEY ="CURRENT_APP_KEY"
 
     fun setLaporanHarian(enable: Boolean){
         put(LAPORAN_KEY, enable)
@@ -100,6 +101,14 @@ object Preferences {
 
     fun deleteListPackage() {
         delete(PACKAGE_KEY)
+    }
+
+    fun getCurrentApp() : String?{
+        return get(CURRENT_APP_KEY, null)
+    }
+
+    fun setCurrentApp(currentApp : String) {
+        put(CURRENT_APP_KEY, currentApp)
     }
 
 }

@@ -9,5 +9,6 @@ data class App(
     var namaAplikasi: String,
     var iconAplikasi: Drawable,
     var locked: Boolean,
-    var packageName: String
+    var packageName: String,
+    var isSystemPackage: Boolean
 )
