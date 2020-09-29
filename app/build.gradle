@@ -24,6 +24,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 }
 
 dependencies {
@@ -64,6 +72,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
     implementation "com.squareup.okhttp3:logging-interceptor:4.5.0"
 
+    //gson
+    implementation 'com.google.code.gson:gson:2.8.5'
+
     // Navigation Components
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.0"
     implementation "androidx.navigation:navigation-ui-ktx:2.3.0"
@@ -90,4 +101,7 @@ dependencies {
 
     //alarm
     implementation 'com.github.zubairehman:AlarmManager:v1.2.0-alpha01'
+
+    //lottie
+    implementation 'com.airbnb.android:lottie:3.4.2'
 }

@@ -4,9 +4,8 @@
     package="com.jawabdulu.app">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
@@ -18,17 +17,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.WinActivity"></activity>
-        <activity android:name=".ui.activity.LockedActivity" />
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.activity.LockedActivity"/>
+        <activity android:name=".ui.activity.WinActivity" />
+        <activity android:name=".ui.activity.QuizActivity" />
         <activity android:name=".ui.activity.SplashJawabDuluActivity" />
         <activity android:name=".ui.activity.VerifikasiOTPActivity" />
         <activity android:name=".ui.activity.DataOrangTuaActivity" />
         <activity android:name=".ui.activity.MainActivity" />
-        <activity android:name=".ui.activity.IntroSliderActivity"
+        <activity
+            android:name=".ui.activity.IntroSliderActivity"
             android:label="My Custom AppIntro" />
-        <activity android:name=".ui.activity.QuizActivity" />
+        <activity android:name=".ui.activity.AppsActivity" />
         <activity android:name=".ui.activity.PasscodeActivity" />
         <activity android:name=".ui.activity.DataAnakActivity" />
         <activity android:name=".ui.activity.SplashScreenActivity">
@@ -38,8 +38,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".servicejava.BackgroundService" />
 
+        <service
+            android:name=".servicejava.BackgroundService"
+            android:enabled="true" />
+
+        <receiver android:name=".servicejava.RestartService">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

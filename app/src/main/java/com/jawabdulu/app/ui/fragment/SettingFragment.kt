@@ -28,9 +28,10 @@ class SettingFragment : BaseFragment(R.layout.fragment_setting), IAlarmListener 
         super.onViewCreated(view, savedInstanceState)
 
         switchSettingLaporan.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked)
+            if (isChecked) {
+                sendSMS()
                 Preferences.setLaporanHarian(true)
-            else 
+            } else
                 Preferences.setLaporanHarian(false)
         }
  
@@ -53,6 +54,10 @@ class SettingFragment : BaseFragment(R.layout.fragment_setting), IAlarmListener 
     }
 
     override fun perform(context: Context, intent: Intent) {
+
+    }
+
+    private fun sendSMS(){
         val anak = Preferences.getDataAnak()
         val content = "Laporan Harian Jawab Dulu!, hari ini ${anak!!.nama} bisa menjawab ${anak.totalBenar} pertanyaan dengan benar loh ! dan aplikasi favorit ${anak.nama} adalah : Pou"
 
@@ -76,5 +81,4 @@ class SettingFragment : BaseFragment(R.layout.fragment_setting), IAlarmListener 
             }
         })
     }
-
 }

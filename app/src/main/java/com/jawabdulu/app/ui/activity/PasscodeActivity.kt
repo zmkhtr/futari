@@ -78,7 +78,7 @@ class PasscodeActivity : BaseActivity() {
             if (Preferences.isFirstOpenTemp()) {
                 if (Preferences.getUserPassCode() == passCode) {
                     Preferences.setIsUserFirstOpenTemp(false)
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, AppsActivity::class.java))
                     createToast("Passcode berhasil dipasang")
                     finish()
                 } else {
@@ -88,7 +88,7 @@ class PasscodeActivity : BaseActivity() {
                 }
             } else if (Preferences.getUserPassCode() == passCode) {
                 createToast("Passcode benar")
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, AppsActivity::class.java))
                 finish()
             } else {
                 createToast("Passcode salah")
@@ -114,7 +114,7 @@ class PasscodeActivity : BaseActivity() {
                     .setTitle("APP OVERLAY Permission")
                     .setMessage("Mohon perbolehkan permission APP OVERLAY untuk aplikasi ini pada Setting")
                     .setPositiveButton(
-                        "Allow"
+                        "Izinkan"
                     ) { dialog, which ->
                             val intent = Intent(
                                 Settings.ACTION_MANAGE_OVERLAY_PERMISSION
@@ -122,9 +122,6 @@ class PasscodeActivity : BaseActivity() {
                             )
                         startActivity(intent)
                     }
-                    .setNegativeButton(
-                        "Abort"
-                    ) { dialog, which -> }
                     .show()
 
             }
@@ -150,11 +147,8 @@ class PasscodeActivity : BaseActivity() {
                 .setTitle("USAGE STATE Permission")
                 .setMessage("Mohon perbolehkan permission USAGE STATE untuk aplikasi ini pada Setting")
                 .setPositiveButton(
-                    "Allow"
+                    "Izinkan"
                 ) { dialog, which -> startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)) }
-                .setNegativeButton(
-                    "Abort"
-                ) { dialog, which -> }
                 .show()
         }
         mServiceIntent = Intent(this, BackgroundService::class.java)

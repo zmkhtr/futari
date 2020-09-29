@@ -20,17 +20,17 @@ class IntroSliderActivity : AppIntro2() {
         // Call addSlide passing your Fragments.
         // You can use AppIntroFragment to use a pre-built fragment
         addSlide(AppIntroFragment.newInstance(
-            title = "Jawab Dulu! sebelum Bermain.",
-            description = "Kunci Aplikasi atau permainan dengan Quiz Menarik  untuk menambah pengetahuan anak",
-            imageDrawable = R.drawable.ic_anak_one,
+            title = "Jawab Dulu! \nsebelum Bermain.",
+            description = "Kunci Aplikasi atau permainan dengan Quiz Menarik untuk menambah pengetahuan anak",
+            imageDrawable = R.drawable.kids,
             backgroundColor = ContextCompat.getColor(this, R.color.white),
             titleColor = ContextCompat.getColor(this, R.color.colorAccent),
             descriptionColor = ContextCompat.getColor(this, R.color.color_black)
         ))
         addSlide(AppIntroFragment.newInstance(
-            title = "Laporan Harian",
-            description = "Tambahkan kontak orang tua untuk mendapatkan laporan harian sang anak.",
-            imageDrawable = R.drawable.ic_ortu_two,
+            title = "Permission",
+            description = "Izinkan semua permission yang diperlukan agar aplikasi berjalan dengan semestinya",
+            imageDrawable = R.drawable.ic_key,
             backgroundColor = ContextCompat.getColor(this, R.color.white),
             titleColor = ContextCompat.getColor(this, R.color.colorAccent),
             descriptionColor = ContextCompat.getColor(this, R.color.color_black)

@@ -21,9 +21,9 @@ abstract class BaseFragment(@LayoutRes contentLayoutId : Int) : Fragment(content
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = (activity as MainActivity).viewModel
-        viewModelApp = (activity as MainActivity).viewModelApp
-        viewModelBigBox = (activity as MainActivity).viewModelBigBox
+//        viewModel = (activity as MainActivity).viewModel
+//        viewModelApp = (activity as MainActivity).viewModelApp
+//        viewModelBigBox = (activity as MainActivity).viewModelBigBox
     }
 
     var hasInitializedRootView = false

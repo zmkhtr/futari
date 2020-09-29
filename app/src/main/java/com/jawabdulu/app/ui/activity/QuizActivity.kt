@@ -1,27 +1,25 @@
 package com.jawabdulu.app.ui.activity
 
 import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
-import androidx.appcompat.app.AppCompatActivity
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.jawabdulu.app.models.QuizResponse
 import com.jawabdulu.app.R
-import com.jawabdulu.app.api.ApiInterface
 import com.jawabdulu.app.db.QuizDatabase
+import com.jawabdulu.app.models.QuizResponse
 import com.jawabdulu.app.preferences.Preferences
 import com.jawabdulu.app.repository.QuizRepository
 import com.jawabdulu.app.viewModel.QuizViewModel
 import com.jawabdulu.app.viewModel.QuizViewModelFactory
 import kotlinx.android.synthetic.main.activity_quiz.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
 
 class QuizActivity : BaseActivity() {
     private val TAG = "QuizActivity"
@@ -58,11 +56,13 @@ class QuizActivity : BaseActivity() {
         Log.d(TAG, "randomQuiz: $ff")
         Log.d(TAG, "randomQuiz: $random")
         Log.d(TAG, "randomQuiz: 2 ${listQuiz.size}")
-        viewModel.getQuizRandom(listQuiz[random].id!!, Preferences.getDataAnak()!!.kelas).observe(this, Observer {
-            Log.d(TAG, "onCreate:2 $it")
-            setQuiz(it[0])
-            quizHandler(it[0])
-        })
+        viewModel.getQuizRandom(listQuiz[random].id!!, Preferences.getDataAnak()!!.kelas).observe(
+            this,
+            Observer {
+                Log.d(TAG, "onCreate:2 $it")
+                setQuiz(it[0])
+                quizHandler(it[0])
+            })
     }
 
     private fun setQuiz(quizResponseItem: QuizResponse.QuizResponseItem){
@@ -79,11 +79,17 @@ class QuizActivity : BaseActivity() {
         dataAnak?.totalBenar = dataAnak?.totalBenar?.plus(1)!!
         Preferences.setDataAnak(dataAnak)
 
+        val resId = resources.getIdentifier(R.raw.correct_sound.toString(),
+            "raw", this.packageName)
+        val mp: MediaPlayer = MediaPlayer.create(applicationContext, resId)
+        mp.start()
         Preferences.setWrongCount(0)
         Log.d(TAG, "rightAnswer: " + Preferences.getDataAnak())
-        val intent = Intent(this, WinActivity::class.java)
-        startActivity(intent)
-        finishAffinity()
+        animationQuizCorrect.playAnimation()
+        CoroutineScope(Dispatchers.IO).launch {
+            delay(1000)
+            finishAffinity()
+        }
     }
 
     private fun wrongAnswer(){
@@ -91,6 +97,10 @@ class QuizActivity : BaseActivity() {
         dataAnak?.totalSalah = dataAnak?.totalSalah?.plus(1)!!
         Preferences.setDataAnak(dataAnak)
 
+        val resId = resources.getIdentifier(R.raw.wrong_sound.toString(),
+            "raw", this.packageName)
+        val mp: MediaPlayer = MediaPlayer.create(applicationContext, resId)
+        mp.start()
 
         val wrong = Preferences.getWrongCount() + 1
         Preferences.setWrongCount(wrong)
@@ -103,6 +113,15 @@ class QuizActivity : BaseActivity() {
             startActivity(intent)
             finishAffinity()
         } else {
+            animationQuizWrong.visibility = View.VISIBLE
+            animationQuizWrong.playAnimation()
+            CoroutineScope(Dispatchers.IO).launch {
+                delay(500)
+                CoroutineScope(Dispatchers.Main).launch {
+                    animationQuizWrong.visibility = View.GONE
+                }
+                mp.stop()
+            }
             randomQuiz()
         }
     }
@@ -112,7 +131,7 @@ class QuizActivity : BaseActivity() {
             if (quizResponseItem.optionOne == quizResponseItem.answer) {
                 rightAnswer()
             } else {
-                createToast("Jawabanmu Salah :(")
+//                createToast("Jawabanmu Salah :(")
                 wrongAnswer()
             }
         }
@@ -121,7 +140,7 @@ class QuizActivity : BaseActivity() {
             if (quizResponseItem.optionTwo == quizResponseItem.answer) {
                 rightAnswer()
             } else {
-                createToast("Jawabanmu Salah :(")
+//                createToast("Jawabanmu Salah :(")
                 wrongAnswer()
             }
         }
@@ -130,7 +149,7 @@ class QuizActivity : BaseActivity() {
             if (quizResponseItem.optionThree == quizResponseItem.answer) {
                 rightAnswer()
             } else {
-                createToast("Jawabanmu Salah :(")
+//                createToast("Jawabanmu Salah :(")
                 wrongAnswer()
             }
         }
@@ -139,7 +158,7 @@ class QuizActivity : BaseActivity() {
             if (quizResponseItem.optionFour == quizResponseItem.answer) {
                 rightAnswer()
             } else {
-                createToast("Jawabanmu Salah :(")
+//                createToast("Jawabanmu Salah :(")
                 wrongAnswer()
             }
         }

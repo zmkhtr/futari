@@ -32,7 +32,7 @@ class DataAnakActivity : BaseActivity() {
             } else {
                 Preferences.setDataAnak(anak)
                 Log.d(TAG, "onCreate: 2 " + Preferences.getDataAnak())
-                startActivity(Intent(this, DataOrangTuaActivity::class.java))
+                startActivity(Intent(this, PasscodeActivity::class.java))
                 finish()
             }
         }

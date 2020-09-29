@@ -33,14 +33,14 @@ class SplashScreenActivity : AppCompatActivity() {
                     startActivity(Intent(this@SplashScreenActivity, DataAnakActivity::class.java))
                     finish()
                 }
-                Preferences.getDataOrangTua() == null -> {
-                    startActivity(Intent(this@SplashScreenActivity, DataOrangTuaActivity::class.java))
-                    finish()
-                }
-                !Preferences.getDataOrangTua()!!.verified -> {
-                    startActivity(Intent(this@SplashScreenActivity, DataOrangTuaActivity::class.java))
-                    finish()
-                }
+//                Preferences.getDataOrangTua() == null -> {
+//                    startActivity(Intent(this@SplashScreenActivity, DataOrangTuaActivity::class.java))
+//                    finish()
+//                }
+//                !Preferences.getDataOrangTua()!!.verified -> {
+//                    startActivity(Intent(this@SplashScreenActivity, DataOrangTuaActivity::class.java))
+//                    finish()
+//                }
                 else -> {
                     startActivity(Intent(this@SplashScreenActivity, PasscodeActivity::class.java))
                     finish()

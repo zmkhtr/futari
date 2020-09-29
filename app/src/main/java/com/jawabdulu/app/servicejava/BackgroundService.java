@@ -21,7 +21,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.jawabdulu.app.preferences.Preferences;
-import com.jawabdulu.app.ui.activity.SplashJawabDuluActivity;
+import com.jawabdulu.app.ui.activity.QuizActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,7 +125,7 @@ public class BackgroundService extends Service {
                         if (name.contains(process)) {
                                 if (!Preferences.INSTANCE.getCurrentApp().equals(process)) {
                                     Preferences.INSTANCE.setCurrentApp(process);
-                                    Intent lockIntent = new Intent(mContext, SplashJawabDuluActivity.class);
+                                    Intent lockIntent = new Intent(mContext, QuizActivity.class);
                                     lockIntent.putExtra("package", process);
                                     lockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     mContext.startActivity(lockIntent);
@@ -155,7 +155,7 @@ public class BackgroundService extends Service {
                         flag = 1;
 
                         current_app = printForegroundTask();
-                        Intent lockIntent = new Intent(mContext, SplashJawabDuluActivity.class);
+                        Intent lockIntent = new Intent(mContext, QuizActivity.class);
                         lockIntent.putExtra("name", name.indexOf(printForegroundTask()));
                         lockIntent.putExtra("pack", printForegroundTask());
                         lockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

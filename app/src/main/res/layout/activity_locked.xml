@@ -7,10 +7,24 @@
     android:background="@color/colorAccent"
     tools:context=".ui.activity.LockedActivity">
 
-    <ImageView
+<!--    <com.airbnb.lottie.LottieAnimationView-->
+<!--        android:id="@+id/animationQuizWrong"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:scaleType="centerCrop"-->
+<!--        app:lottie_rawRes="@raw/wrong"-->
+<!--        app:lottie_loop="false"-->
+<!--        app:lottie_autoPlay="false"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/tvLockedCountDown"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:srcCompat="@drawable/locked" />-->
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/imageView9"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="188dp"
         android:layout_marginEnd="24dp"
@@ -19,7 +33,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/locked" />
+        app:lottie_rawRes="@raw/lock"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true" />
 
     <TextView
         android:id="@+id/tvLockedCountDown"

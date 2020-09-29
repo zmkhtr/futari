@@ -2,13 +2,16 @@ package com.jawabdulu.app.viewModel
 
 import android.app.Application
 import android.content.Context
+import android.content.pm.PackageInfo
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.jawabdulu.app.MyApplication
+import com.jawabdulu.app.models.App
 import com.jawabdulu.app.models.QuizResponse
 import com.jawabdulu.app.repository.QuizRepository
 import com.jawabdulu.app.util.Resource
@@ -21,10 +24,13 @@ class QuizViewModel(
     val quizRepository : QuizRepository
 ) : AndroidViewModel(app) {
 
+    private val TAG = "QuizViewModel"
+
     val quiz : MutableLiveData<Resource<QuizResponse>> = MutableLiveData()
+    val apps : MutableLiveData<List<PackageInfo>> = MutableLiveData()
 
     init {
-        getQuizNetwork()
+        getInstalledApps(app)
     }
 
     fun getQuizNetwork() = viewModelScope.launch {
@@ -94,5 +100,11 @@ class QuizViewModel(
             }
         }
         return false
+    }
+
+    fun getInstalledApps(context: Context){
+        val packs = context.packageManager.getInstalledPackages(0)
+
+        apps.postValue(packs)
     }
 }
